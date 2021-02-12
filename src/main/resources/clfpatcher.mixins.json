@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "pm.c7.clfpatcher.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "GameRendererAccessor",
+    "MixinGameRenderer",
+    "MixinMinecraft",
+    "MixinOptionsScreen",
+    "MixinTranslationStorage"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

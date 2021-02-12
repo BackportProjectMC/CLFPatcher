@@ -1,0 +1,17 @@
+{
+    "schemaVersion": 1,
+    "id": "clfpatcher",
+    "version": "${version}",
+    "name": "CLFPatcher",
+    "description": "Quality of life features and patches for b1.7.3",
+    "authors": ["Cynosphere"],
+    "contact": {
+        "sources": "https://github.com/BackportProjectMC/CLFPatcher"
+    },
+    "license": "MIT",
+    "environment": "client",
+    "entrypoints": {
+        "client": ["pm.c7.clfpatcher.CLFPatcher"]
+    },
+    "mixins": ["clfpatcher.mixins.json"]
+}
