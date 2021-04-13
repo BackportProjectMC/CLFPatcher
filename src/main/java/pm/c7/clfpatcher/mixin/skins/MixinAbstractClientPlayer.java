@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import pm.c7.clfpatcher.CLFPatcher;
 import pm.c7.clfpatcher.skins.SkinProcessor;
 
 @Mixin(AbstractClientPlayer.class)
@@ -30,8 +31,10 @@ public class MixinAbstractClientPlayer extends Player {
         if (uuid != null) {
             SkinProcessor.SkinMetadata metadata = SkinProcessor.getMetadataFromUUID(uuid);
             if (metadata != null) {
-                this.skinUrl = metadata.url;
-                this.cloakUrl = metadata.capeUrl;
+                if (metadata.url != null)
+                    this.skinUrl = metadata.url;
+                if (metadata.capeUrl != null)
+                    this.cloakUrl = metadata.capeUrl;
             }
         }
         String customCape = SkinProcessor.getCustomCape(this.name);

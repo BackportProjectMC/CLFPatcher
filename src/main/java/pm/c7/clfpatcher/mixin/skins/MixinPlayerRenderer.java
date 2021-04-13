@@ -20,13 +20,10 @@ public class MixinPlayerRenderer extends LivingEntityRenderer implements PlayerR
     }
 
     @Shadow
-    public void render(Entity entity, double x, double y, double z, float f, float f1) {}
-
-    @Shadow
     private BipedModel field_294;
 
     public void setSlim(boolean slim) {
-        this.field_909 = (EntityModel)new PlayerModel(0.0F, slim);
+        this.field_909 = new PlayerModel(0.0F, slim);
         this.field_294 = (BipedModel)this.field_909;
     }
 
@@ -35,5 +32,10 @@ public class MixinPlayerRenderer extends LivingEntityRenderer implements PlayerR
         if (this.field_909 instanceof PlayerModel) {
             ((PlayerModel)this.field_909).drawFirstPersonHand();
         }
+    }
+
+    @Shadow
+    public void render(Entity entity, double x, double y, double z, float f, float f1) {
+
     }
 }

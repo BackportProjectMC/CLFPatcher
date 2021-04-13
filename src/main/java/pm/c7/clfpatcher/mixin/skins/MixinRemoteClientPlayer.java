@@ -31,8 +31,10 @@ public class MixinRemoteClientPlayer extends Player {
         if (uuid != null) {
             SkinProcessor.SkinMetadata metadata = SkinProcessor.getMetadataFromUUID(uuid);
             if (metadata != null) {
-                this.skinUrl = metadata.url;
-                this.cloakUrl = metadata.capeUrl;
+                if (metadata.url != null)
+                    this.skinUrl = metadata.url;
+                if (metadata.capeUrl != null)
+                    this.cloakUrl = metadata.capeUrl;
             }
         }
         String customCape = SkinProcessor.getCustomCape(name);

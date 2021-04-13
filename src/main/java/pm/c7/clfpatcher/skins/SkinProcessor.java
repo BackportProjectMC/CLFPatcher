@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import pm.c7.clfpatcher.CLFPatcher;
 
+import javax.annotation.Nullable;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -64,11 +65,28 @@ public class SkinProcessor {
             String propsDecoded = new String(Base64.getDecoder().decode(propsJson.get("value").getAsString()));
 
             SkinProperties properties = new Gson().fromJson(propsDecoded, SkinProperties.class);
-            JsonObject skinJson = properties.textures.get("SKIN").getAsJsonObject();
+            JsonElement skin = properties.textures.get("SKIN");
             JsonElement cape = properties.textures.get("CAPE");
+            JsonObject skinJson = skin != null ? skin.getAsJsonObject() : null;
             JsonObject capeJson = cape != null ? cape.getAsJsonObject() : null;
+            JsonElement skinMeta;
+            JsonObject skinMetaJson;
+            JsonElement model;
+            String modelType = null;
+            if (skinJson != null) {
+                skinMeta = skinJson.get("metadata");
+                if (skinMeta != null) {
+                    skinMetaJson = skinMeta.getAsJsonObject();
+                    if (skinMetaJson != null) {
+                        model = skinMetaJson.get("model");
+                        if (model != null) {
+                            modelType = model.getAsString();
+                        }
+                    }
+                }
+            }
 
-            SkinMetadata metadata = new SkinMetadata(skinJson.get("url").getAsString(), capeJson != null ? capeJson.get("url").getAsString() : null, skinJson.get("metadata").getAsJsonObject().get("model").getAsString());
+            SkinMetadata metadata = new SkinMetadata(skinJson != null ? skinJson.get("url").getAsString() : null, capeJson != null ? capeJson.get("url").getAsString() : null, modelType);
 
             metadataCache.put(uuid, metadata);
 
@@ -135,10 +153,10 @@ public class SkinProcessor {
         public String capeUrl;
         public ModelType model = ModelType.NORMAL;
 
-        SkinMetadata(String url, String capeUrl, String model) {
+        SkinMetadata(String url, String capeUrl, @Nullable String model) {
             this.url = url;
             this.capeUrl = capeUrl;
-            if (model.equals("slim")) {
+            if (model != null && model.equals("slim")) {
                 this.model = ModelType.SLIM;
             }
         };
