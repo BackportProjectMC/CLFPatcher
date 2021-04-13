@@ -9,7 +9,17 @@
     "MixinGameRenderer",
     "MixinMinecraft",
     "MixinOptionsScreen",
-    "MixinTranslationStorage"
+    "MixinTranslationStorage",
+    "ButtonAccessor",
+    "skins.MixinImageProcessorImpl",
+    "skins.MixinLoginThread",
+    "skins.MixinRemoteClientPlayer",
+    "skins.MixinAbstractClientPlayer",
+    "skins.MixinPlayerRenderer",
+    "skins.MixinEntityRenderDispatcher",
+    "skins.MixinClass552",
+    "skins.MixinModelPart",
+    "skins.MixinBipedModel"
   ],
   "injectors": {
     "defaultRequire": 1

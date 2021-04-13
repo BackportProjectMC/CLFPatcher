@@ -66,6 +66,10 @@ dependencies {
 	// CLA packs a broken version, update it
 	implementation "tk.valoeghese:ZoesteriaConfig:1.3.6"
 	include "tk.valoeghese:ZoesteriaConfig:1.3.6"
+
+	// MCAuthLib
+	//implementation "com.github.Steveice10:MCAuthLib:1.3"
+	//include "com.github.Steveice10:MCAuthLib:1.3"
 }
 
 processResources {
